@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block title %}
+Client
+{% endblock %}
+{% block main %}
+<div class="return-page">
+    <a id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+  </div>
+<div class="container mt-5">
+    <h2>Cadastrar Cliente</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    {% if customers %}
+        <h3 class="mt-5">Lista de Clientes</h3>
+        <ul class="list-group mt-3">
+            {% for customer in customers %}
+                <li class="list-group-item">
+                   Nome: {{ customer.name }} <br> Email: {{ customer.email }} <br> Número: {{ customer.phone }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+.help-text{
+    opacity: 0.6;
+    font-size: 0.7em;
+}
+
+#return-icon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: fixed;
+    left: 100px;
+}

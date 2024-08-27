@@ -3,12 +3,73 @@
 Home
 {% endblock %}
 {% block main %}
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-12">
-            <h1>Home</h1>
-            <button class="btn btn-primary">Teste bootstrap</button>
+        <div class="col-12 text-center">
+            <h1 class="display-4">Bem-vindo ao Sistema de Restaurante</h1>
+            <p class="help-text">Feito por: Gustavo Nery, Kayllane Sanches, Laura Torres e Paulo Affonso</p>
+            <p class="lead">Gerencie facilmente seu restaurante com nosso sistema completo.</p>
+            <hr class="my-4">
+            <p>Abaixo estão algumas das funcionalidades disponíveis:</p>
         </div>
     </div>
-</div>  
+    <div class="row text-center mt-4">
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gestão de Clientes</h5>
+                    <p class="card-text">Cadastre clientes e veja suas informações e detalhes disponíveis.</p>
+                    <a href="{% url "customer" %}" class="btn btn-primary">Ver Clientes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciamento de Pedidos</h5>
+                    <p class="card-text">Acompanhe e gerencie os pedidos dos clientes de forma eficiente.</p>
+                    <a class="btn btn-primary">Ver Pedidos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciamento de Reservas</h5>
+                    <p class="card-text">Facilite a gestão de reservas e garanta a melhor experiência para seus clientes.</p>
+                    <a class="btn btn-primary">Ver Reservas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center mt-4">
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gestão de Menu</h5>
+                    <p class="card-text">Adicione e organize os itens do menu de forma fácil e prática.</p>
+                    <a class="btn btn-primary">Ver Menu</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciamento de Funcionários</h5>
+                    <p class="card-text">Faça cadastro e organize as funções dos seus funcionários com praticidade.</p>
+                    <a class="btn btn-primary">Ver Funcionários</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Feedback dos Clientes</h5>
+                    <p class="card-text">Receba e analise o feedback dos clientes para melhorar seu serviço.</p>
+                    <a class="btn btn-primary">Ver Feedback</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
