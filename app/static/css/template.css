@@ -45,3 +45,12 @@ input, textarea{
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+@media screen and (max-width: 1000px) {
+    #return-icon {
+        left: 20px;
+    }
+    .card {
+        margin: 10px;
+    }
+}
