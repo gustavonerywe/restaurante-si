@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+{% block title %}
+Editar
+{% endblock %}
+{% block main %}
+<div class="return-page">
+    <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+ </div>
+<div class="container mt-5">
+    <h1>Edite Cliente</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,11 +1,11 @@
 {% extends "template.html" %}
 {% block title %}
-Client
+Cliente
 {% endblock %}
 {% block main %}
 <div class="return-page">
-    <a id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
-  </div>
+    <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+ </div>
 <div class="container mt-5">
     <h2>Cadastrar Cliente</h2>
     <form method="POST">
@@ -17,9 +17,19 @@ Client
         <h3 class="mt-5">Lista de Clientes</h3>
         <ul class="list-group mt-3">
             {% for customer in customers %}
-                <li class="list-group-item">
-                   Nome: {{ customer.name }} <br> Email: {{ customer.email }} <br> Número: {{ customer.phone }}
-                </li>
+            <li id="customer-{{customer.id}}" class="list-group-item">
+                <div>
+                    Nome: {{ customer.name }} <br> Email: {{ customer.email }} <br> Número: {{ customer.phone }}
+                </div>
+                <div>
+                    <a class="edit" href="{% url "edit_customer" customer.id %}" data-customer="{{customer.id}}">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                    <span data-customer="{{customer.id}}" class="remove" id="remove-{{customer.id}}">
+                        <i class="fa-solid fa-x"></i>
+                    </span>
+                </div>
+            </li>
             {% endfor %}
         </ul>
     {% endif %}
