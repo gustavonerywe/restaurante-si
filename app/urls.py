@@ -8,4 +8,6 @@ urlpatterns = [
     path('edit_customer/<int:customer_id>/', edit_customer, name='edit_customer'),
     path('menu/', menu, name='menu'),
     path('category/', category, name='category'),
+    path('delete_category/<int:category_id>/', delete_category, name='delete_category'),
+    path('edit_category/<int:category_id>/', edit_category, name='edit_category'),
 ]

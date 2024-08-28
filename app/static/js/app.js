@@ -38,4 +38,28 @@ document.addEventListener('DOMContentLoaded', function (){
             });
         }
     })
+
+    document.querySelectorAll('.remove-category').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-category')
+            console.log(id)
+            var url = `/delete_category/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('category-' + id).remove();
+                }
+            });
+        }
+    })
 })

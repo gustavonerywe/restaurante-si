@@ -22,16 +22,18 @@ Categoria
                     Nome: {{ category.name }} <br> Decrição: {{ category.description }} <br> Criado em: {{ category.created_at|date:"d/m/Y" }}
                 </div>
                 <div>
-                    {% comment %} <a class="edit" href="{% url "edit_category" category.id %}" data-category="{{category.id}}"> {% endcomment %}
+                    <a class="edit-category ed" href="{% url "edit_category" category.id %}" data-category="{{category.id}}">
                         <i class="fa-solid fa-pencil"></i>
                     </a>
-                    <span data-category="{{category.id}}" class="remove" id="remove-{{category.id}}">
+                    <span data-category="{{category.id}}" class="remove-category rm" id="remove-{{category.id}}">
                         <i class="fa-solid fa-x"></i>
                     </span>
                 </div>
             </li>
             {% endfor %}
         </ul>
+    {% else %}
+    <h3 class="mt-5">Nenhuma categoria cadastrada</h3>
     {% endif %}
 </div>
 {% endblock %}

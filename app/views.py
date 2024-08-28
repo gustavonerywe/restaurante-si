@@ -49,3 +49,20 @@ def category(request):
         form = CategoryForm()
     categorys = Category.objects.all()
     return render(request, 'menu/category.html', {'form': form, 'categorys': categorys})
+
+def delete_category(request, category_id):
+    if request.method == 'POST':
+        category = Category.objects.get(pk=category_id)
+        category.delete()
+    return JsonResponse({'success': True})
+
+def edit_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('category')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'menu/edit_category.html', {'form': form})
