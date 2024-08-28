@@ -17,7 +17,7 @@ def customer(request):
         form = CustomerForm()
     
     customers = Customer.objects.all() 
-    return render(request, 'customer.html', {'form': form, 'customers': customers})
+    return render(request, 'customer/customer.html', {'form': form, 'customers': customers})
 
 def delete_customer(request, customer_id):
     if request.method == 'POST':
@@ -34,4 +34,4 @@ def edit_customer(request, customer_id):
             return redirect('customer')
     else:
         form = CustomerForm(instance=customer)
-    return render(request, 'edit_customer.html', {'form': form})
+    return render(request, 'customer/edit_customer.html', {'form': form})
