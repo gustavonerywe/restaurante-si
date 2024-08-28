@@ -1,13 +1,13 @@
 {% extends "template.html" %}
 {% block title %}
-Cliente
+Categoria
 {% endblock %}
 {% block main %}
 <div class="return-page">
     <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
  </div>
 <div class="container mt-5">
-    <h2>Cadastrar Cliente</h2>
+    <h2>Cadastrar Categoria </h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
