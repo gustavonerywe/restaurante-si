@@ -49,3 +49,20 @@ def REMOVIDO(request):
         form = CategoryForm()
     REMOVIDOs = Category.objects.all()
     return render(request, 'menu/REMOVIDO.html', {'form': form, 'REMOVIDOs': REMOVIDOs})
+
+def delete_REMOVIDO(request, REMOVIDO_id):
+    if request.method == 'POST':
+        REMOVIDO = Category.objects.get(pk=REMOVIDO_id)
+        REMOVIDO.delete()
+    return JsonResponse({'success': True})
+
+def edit_REMOVIDO(request, REMOVIDO_id):
+    REMOVIDO = Category.objects.get(pk=REMOVIDO_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=REMOVIDO)
+        if form.is_valid():
+            form.save()
+            return redirect('REMOVIDO')
+    else:
+        form = CategoryForm(instance=REMOVIDO)
+    return render(request, 'menu/edit_REMOVIDO.html', {'form': form})

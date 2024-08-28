@@ -22,16 +22,18 @@ Categoria
                     Nome: {{ REMOVIDO.name }} <br> Decrição: {{ REMOVIDO.description }} <br> Criado em: {{ REMOVIDO.created_at|date:"d/m/Y" }}
                 </div>
                 <div>
-                    {% comment %} <a class="edit" href="{% url "edit_REMOVIDO" REMOVIDO.id %}" data-REMOVIDO="{{REMOVIDO.id}}"> {% endcomment %}
+                    <a class="edit-REMOVIDO ed" href="{% url "edit_REMOVIDO" REMOVIDO.id %}" data-REMOVIDO="{{REMOVIDO.id}}">
                         <i class="fa-solid fa-pencil"></i>
                     </a>
-                    <span data-REMOVIDO="{{REMOVIDO.id}}" class="remove" id="remove-{{REMOVIDO.id}}">
+                    <span data-REMOVIDO="{{REMOVIDO.id}}" class="remove-REMOVIDO rm" id="remove-{{REMOVIDO.id}}">
                         <i class="fa-solid fa-x"></i>
                     </span>
                 </div>
             </li>
             {% endfor %}
         </ul>
+    {% else %}
+    <h3 class="mt-5">Nenhuma categoria cadastrada</h3>
     {% endif %}
 </div>
 {% endblock %}

@@ -12,22 +12,22 @@
     z-index: 1000;
 }
 
-.remove, .edit {
+.rm, .ed {
     cursor: pointer;
     color: red;
     transition: all 0.3s ease;
     margin-left: 10px; 
 }
 
-.remove:hover {
+.rm:hover {
     color: darkred;
 }
 
-.edit {
+.ed {
     color: blue;
 }
 
-.edit:hover {
+.ed:hover {
     color: darkblue;
 }
 
