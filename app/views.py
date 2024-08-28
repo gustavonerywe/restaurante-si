@@ -35,3 +35,17 @@ def edit_customer(request, customer_id):
     else:
         form = CustomerForm(instance=customer)
     return render(request, 'customer/edit_customer.html', {'form': form})
+
+def menu(request):
+    return render(request, 'menu/menu.html')
+
+def REMOVIDO(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('REMOVIDO')
+    else:
+        form = CategoryForm()
+    REMOVIDOs = Category.objects.all()
+    return render(request, 'menu/REMOVIDO.html', {'form': form, 'REMOVIDOs': REMOVIDOs})
