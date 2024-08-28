@@ -35,3 +35,17 @@ def edit_customer(request, customer_id):
     else:
         form = CustomerForm(instance=customer)
     return render(request, 'customer/edit_customer.html', {'form': form})
+
+def menu(request):
+    return render(request, 'menu/menu.html')
+
+def category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('category')
+    else:
+        form = CategoryForm()
+    categorys = Category.objects.all()
+    return render(request, 'menu/category.html', {'form': form, 'categorys': categorys})
