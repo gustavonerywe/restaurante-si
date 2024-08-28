@@ -11,7 +11,7 @@ Editar
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Salvar</button>
+        <button class="btn btn-primary" type="submit">Salvar</button>
     </form>
 </div>
 {% endblock %}
