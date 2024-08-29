@@ -1,4 +1,5 @@
 {% extends "template.html" %}
+{% load currency %}
 {% block title %}
 Funcionário
 {% endblock %}
@@ -19,7 +20,7 @@ Funcionário
             {% for employee in employees %}
             <li id="employee-{{employee.id}}" class="list-group-item">
                 <div>
-                    Nome: {{ employee.name }} <br> Cargo: {{ employee.role }} <br> Contratado em: {{ employee.created_at|date:"d/m/Y" }}
+                    Nome: {{ employee.name }} <br> Cargo: {{ employee.role }} <br> Salário: {{employee.salary|currency}} <br> Contratado em: {{ employee.created_at|date:"d/m/Y" }}
                 </div>
                 <div>
                     <a class="edit-employee ed" href="{% url "edit_employee" employee.id %}" data-employee="{{employee.id}}">
