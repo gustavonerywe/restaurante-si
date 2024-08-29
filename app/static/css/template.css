@@ -37,7 +37,7 @@
     align-items: center;
 }
 
-input, textarea{
+input[type="text"], textarea{
     width: 100%;
     padding: 10px;
     margin: 5px 0;

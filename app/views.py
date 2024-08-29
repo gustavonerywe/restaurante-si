@@ -66,3 +66,31 @@ def edit_category(request, category_id):
     else:
         form = CategoryForm(instance=category)
     return render(request, 'menu/edit_category.html', {'form': form})
+
+def items(request):
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('items')
+    else:
+        form = ItemForm()
+    items = MenuItem.objects.all()
+    return render(request, 'menu/items.html', {'form': form, 'items': items})
+
+def delete_item(request, item_id):
+    if request.method == 'POST':
+        item = MenuItem.objects.get(pk=item_id)
+        item.delete()
+    return JsonResponse({'success': True})
+
+def edit_item(request, item_id):
+    item = MenuItem.objects.get(pk=item_id)
+    if request.method == 'POST':
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('items')
+    else:
+        form = ItemForm(instance=item)
+    return render(request, 'menu/edit_item.html', {'form': form})

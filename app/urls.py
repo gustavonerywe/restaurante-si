@@ -10,4 +10,7 @@ urlpatterns = [
     path('category/', category, name='category'),
     path('delete_category/<int:category_id>/', delete_category, name='delete_category'),
     path('edit_category/<int:category_id>/', edit_category, name='edit_category'),
+    path('item/', items, name='items'),
+    path('delete_item/<int:item_id>/', delete_item, name='delete_item'),
+    path('edit_item/<int:item_id>/', edit_item, name='edit_item'),
 ]

@@ -62,4 +62,28 @@ document.addEventListener('DOMContentLoaded', function (){
             });
         }
     })
+
+    document.querySelectorAll('.remove-item').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-item')
+            console.log(id)
+            var url = `/delete_item/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('item-' + id).remove();
+                }
+            });
+        }
+    })
 })

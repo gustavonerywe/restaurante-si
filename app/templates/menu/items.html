@@ -1,0 +1,40 @@
+{% extends "template.html" %}
+{% load currency %}
+{% block title %}
+Item
+{% endblock %}
+{% block main %}
+<div class="return-page">
+    <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+ </div>
+<div class="container mt-5">
+    <h2>Cadastrar Item </h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    {% if items %}
+        <h3 class="mt-5">Lista de Items</h3>
+        <ul class="list-group mt-3">
+            {% for item in items %}
+            <li id="item-{{item.id}}" class="list-group-item">
+                <div>
+                    Nome: {{ item.name }} <br> Decrição: {{ item.description }} <br>Categoria: {{item.category}} <br> Preço: {{item.price|currency}} <br>  Criado em: {{ item.created_at|date:"d/m/Y" }}
+                </div>
+                <div>
+                    <a class="edit-item ed" href="{% url "edit_item" item.id %}" data-item="{{item.id}}">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                    <span data-item="{{item.id}}" class="remove-item rm" id="remove-{{item.id}}">
+                        <i class="fa-solid fa-x"></i>
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <h3 class="mt-5">Nenhum Item cadastrada</h3>
+    {% endif %}
+</div>
+{% endblock %}
