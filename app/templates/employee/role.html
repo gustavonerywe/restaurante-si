@@ -1,31 +1,31 @@
 {% extends "template.html" %}
 {% block title %}
-Cliente
+Cargo
 {% endblock %}
 {% block main %}
 <div class="return-page">
     <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
  </div>
 <div class="container mt-5">
-    <h2>Cadastrar Cliente</h2>
+    <h2>Cadastrar Cargo</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
-    {% if customers %}
-        <h3 class="mt-5">Lista de Clientes</h3>
+    {% if roles %}
+        <h3 class="mt-5">Lista de Cargos</h3>
         <ul class="list-group mt-3">
-            {% for customer in customers %}
-            <li id="customer-{{customer.id}}" class="list-group-item">
+            {% for role in roles %}
+            <li id="role-{{role.id}}" class="list-group-item">
                 <div>
-                    Nome: {{ customer.name }} <br> Email: {{ customer.email }} <br> Número: {{ customer.phone }}
+                    Nome: {{ role.name }} <br> Decrição: {{ role.description }} <br> Criado em: {{ role.created_at|date:"d/m/Y" }}
                 </div>
                 <div>
-                    <a class="edit ed" href="{% url "edit_customer" customer.id %}" data-customer="{{customer.id}}">
+                    <a class="edit-role ed" href="{% url "edit_role" role.id %}" data-role="{{role.id}}">
                         <i class="fa-solid fa-pencil"></i>
                     </a>
-                    <span data-customer="{{customer.id}}" class="remove rm" id="remove-{{customer.id}}">
+                    <span data-role="{{role.id}}" class="remove-role rm" id="remove-{{role.id}}">
                         <i class="fa-solid fa-x"></i>
                     </span>
                 </div>

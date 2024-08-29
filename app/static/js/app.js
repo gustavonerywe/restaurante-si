@@ -86,4 +86,52 @@ document.addEventListener('DOMContentLoaded', function (){
             });
         }
     })
+
+    document.querySelectorAll('.remove-role').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-role')
+            console.log(id)
+            var url = `/delete_role/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('role-' + id).remove();
+                }
+            });
+        }
+    })
+
+    document.querySelectorAll('.remove-employee').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-employee')
+            console.log(id)
+            var url = `/delete_employee/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('employee-' + id).remove();
+                }
+            });
+        }
+    })
 })

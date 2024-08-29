@@ -15,3 +15,13 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem
         fields = ['name', 'description', 'price', 'category', 'is_available']
+
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = ['name', 'role']
+
+class RoleForm(forms.ModelForm):
+    class Meta:
+        model = Role
+        fields = ['name', 'description']

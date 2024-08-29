@@ -1,31 +1,31 @@
 {% extends "template.html" %}
 {% block title %}
-Cliente
+Funcionário
 {% endblock %}
 {% block main %}
 <div class="return-page">
     <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
  </div>
 <div class="container mt-5">
-    <h2>Cadastrar Cliente</h2>
+    <h2>Cadastrar Funcionário</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
-    {% if customers %}
-        <h3 class="mt-5">Lista de Clientes</h3>
+    {% if employees %}
+        <h3 class="mt-5">Lista de Funcionários</h3>
         <ul class="list-group mt-3">
-            {% for customer in customers %}
-            <li id="customer-{{customer.id}}" class="list-group-item">
+            {% for employee in employees %}
+            <li id="employee-{{employee.id}}" class="list-group-item">
                 <div>
-                    Nome: {{ customer.name }} <br> Email: {{ customer.email }} <br> Número: {{ customer.phone }}
+                    Nome: {{ employee.name }} <br> Cargo: {{ employee.role }} <br> Contratado em: {{ employee.created_at|date:"d/m/Y" }}
                 </div>
                 <div>
-                    <a class="edit ed" href="{% url "edit_customer" customer.id %}" data-customer="{{customer.id}}">
+                    <a class="edit-employee ed" href="{% url "edit_employee" employee.id %}" data-employee="{{employee.id}}">
                         <i class="fa-solid fa-pencil"></i>
                     </a>
-                    <span data-customer="{{customer.id}}" class="remove rm" id="remove-{{customer.id}}">
+                    <span data-employee="{{employee.id}}" class="remove-employee rm" id="remove-{{employee.id}}">
                         <i class="fa-solid fa-x"></i>
                     </span>
                 </div>
