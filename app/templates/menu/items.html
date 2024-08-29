@@ -20,7 +20,7 @@ Item
             {% for item in items %}
             <li id="item-{{item.id}}" class="list-group-item">
                 <div>
-                    Nome: {{ item.name }} <br> Decrição: {{ item.description }} <br>Categoria: {{item.category}} <br> Preço: {{item.price|currency}} <br>  Criado em: {{ item.created_at|date:"d/m/Y" }}
+                    Nome: {{ item.name }} <br> Decrição: {{ item.description }} <br>Categoria: {{item.category}} <br> Preço: {{item.price|currency}} <br>  Criado em: {{ item.created_at|date:"d/m/Y" }} <br>Tem estoque? {% if item.is_available %}Sim!{% else %}Não!{% endif %}
                 </div>
                 <div>
                     <a class="edit-item ed" href="{% url "edit_item" item.id %}" data-item="{{item.id}}">
