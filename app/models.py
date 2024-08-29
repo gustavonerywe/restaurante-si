@@ -67,11 +67,19 @@ class Reservation(models.Model):
 
     def __str__(self):
         return self.customer.name + ' - ' + str(self.date) + ' ' + str(self.time)
+
+class Role(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
     
 class Employee(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-    role = models.CharField(max_length=100)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

@@ -94,3 +94,63 @@ def edit_item(request, item_id):
     else:
         form = ItemForm(instance=item)
     return render(request, 'menu/edit_item.html', {'form': form})
+
+def manage_employee(request):
+    return render(request, 'employee/manage_employee.html')
+
+def role(request):
+    if request.method == 'POST':
+        form = RoleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('role')
+    else:
+        form = RoleForm()
+    roles = Role.objects.all()
+    return render(request, 'employee/role.html', {'form': form, 'roles': roles})
+
+def delete_role(request, role_id):
+    if request.method == 'POST':
+        role = Role.objects.get(pk=role_id)
+        role.delete()
+    return JsonResponse({'success': True})
+
+def edit_role(request, role_id):
+    role = Role.objects.get(pk=role_id)
+    if request.method == 'POST':
+        form = RoleForm(request.POST, instance=role)
+        if form.is_valid():
+            form.save()
+            return redirect('role')
+    else:
+        form = RoleForm(instance=role)
+    return render(request, 'employee/edit_role.html', {'form': form})
+
+def employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employee')
+    else:
+        form = EmployeeForm()
+    employees = Employee.objects.all()
+
+    return render(request, 'employee/employee.html', {'form': form, 'employees': employees})
+
+def delete_employee(request, employee_id):
+    if request.method == 'POST':
+        employee = Employee.objects.get(pk=employee_id)
+        employee.delete()
+    return JsonResponse({'success': True})
+
+def edit_employee(request, employee_id):
+    employee = Employee.objects.get(pk=employee_id)
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            return redirect('employee')
+    else:
+        form = EmployeeForm(instance=employee)
+    return render(request, 'employee/edit_employee.html', {'form': form})
