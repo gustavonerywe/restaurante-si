@@ -5,6 +5,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
     email = models.EmailField()
+    has_table = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -61,12 +62,10 @@ class Table(models.Model):
 class Reservation(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.customer.name + ' - ' + str(self.date) + ' ' + str(self.time)
+        return self.customer.name + ' - ' + str(self.table.number)
 
 class Role(models.Model):
     name = models.CharField(max_length=100)

@@ -1,0 +1,34 @@
+{% extends "template.html" %}
+{% block title %}
+Reservas
+{% endblock %}
+{% block main %}
+<div class="return-page">
+    <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+ </div>
+<div class="container mt-5">
+    <h2>Cadastrar Reserva</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    {% if reservations %}
+        <h3 class="mt-5">Lista de Reservas</h3>
+        <ul class="list-group mt-3">
+            {% for reservation in reservations %}
+            <li id="reservation-{{reservation.id}}" class="list-group-item">
+                <div>
+                    Cliente: {{ reservation.customer }} <br> Mesa: {{ reservation.table }} <br> Criado em: {{ reservation.created_at|date:"d/m/Y" }}
+                </div>
+                <div>
+                    <span data-reservation="{{reservation.id}}" class="remove-reservation rm" id="remove-{{reservation.id}}">
+                        <button class="btn btn-danger">Liberar Mesa</button>
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}
