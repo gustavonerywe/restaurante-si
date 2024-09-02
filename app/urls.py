@@ -20,4 +20,10 @@ urlpatterns = [
     path('employee/', employee, name='employee'),
     path('delete_employee/<int:employee_id>/', delete_employee, name='delete_employee'),
     path('edit_employee/<int:employee_id>/', edit_employee, name='edit_employee'),
+    path('manage_reserve/', manage_reserve, name='manage_reserve'),
+    path('table/', table, name='table'),
+    path('delete_table/<int:table_id>/', delete_table, name='delete_table'),
+    path('edit_table/<int:table_id>/', edit_table, name='edit_table'),
+    path('reservation/', reservation, name='reservation'),
+    path('delete_reservation/<int:reservation_id>/', delete_reservation, name='delete_reservation'),
 ]

@@ -134,4 +134,52 @@ document.addEventListener('DOMContentLoaded', function (){
             });
         }
     })
+
+    document.querySelectorAll('.remove-table').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-table')
+            console.log(id)
+            var url = `/delete_table/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('table-' + id).remove();
+                }
+            });
+        }
+    })
+
+    document.querySelectorAll('.remove-reservation').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-reservation')
+            console.log(id)
+            var url = `/delete_reservation/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('reservation-' + id).remove();
+                }
+            });
+        }
+    })
 })

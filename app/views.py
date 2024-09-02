@@ -154,3 +154,68 @@ def edit_employee(request, employee_id):
     else:
         form = EmployeeForm(instance=employee)
     return render(request, 'employee/edit_employee.html', {'form': form})
+
+def manage_reserve(request):
+    return render(request, 'reserve/manage_reserve.html')
+
+def table(request):
+    if request.method == 'POST':
+        form = TableForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('table')
+    else:
+        form = TableForm()
+    tables = Table.objects.all()
+    return render(request, 'reserve/table.html', {'form': form, 'tables': tables})
+
+def delete_table(request, table_id):
+    if request.method == 'POST':
+        table = Table.objects.get(pk=table_id)
+        table.delete()
+    return JsonResponse({'success': True})
+
+def edit_table(request, table_id):
+    table = Table.objects.get(pk=table_id)
+    if request.method == 'POST':
+        form = TableForm(request.POST, instance=table)
+        if form.is_valid():
+            form.save()
+            return redirect('table')
+    else:
+        form = TableForm(instance=table)
+    return render(request, 'reserve/edit_table.html', {'form': form})
+
+def reservation(request):
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            table = form.cleaned_data['table']
+            customer = form.cleaned_data['customer']
+            if table.is_available:
+                table.is_available = False
+                table.save()
+                if not customer.has_table:
+                    customer.has_table = True
+                    customer.save()
+                form.save()
+            else:
+                form.add_error('table', 'Table is not available')
+            return redirect('reservation')
+    else:
+        form = ReservationForm()
+    reservations = Reservation.objects.all()
+    return render(request, 'reserve/reservation.html', {'form': form, 'reservations': reservations})
+
+
+def delete_reservation(request, reservation_id):
+    if request.method == 'POST':
+        reservation = Reservation.objects.get(pk=reservation_id)
+        table = reservation.table
+        table.is_available = True
+        table.save()
+        customer = reservation.customer
+        customer.has_table = False
+        customer.save()
+        reservation.delete()
+    return JsonResponse({'success': True})

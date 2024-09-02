@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block title %}
-Funcionários
+Reservas
 {% endblock %}
 {% block main %}
 <div class="return-page">
@@ -9,25 +9,25 @@ Funcionários
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 text-center">
-            <h1 class="display-4">Controle a equipe</h1>
+            <h1 class="display-4">Controle as reservas</h1>
         </div>
     </div>
     <div class="row text-center mt-6">
         <div class="col-md-6 mt-6 mt-md-0">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Gestão dos Cargos</h5>
-                    <p class="card-text">Cadastre, edite e exclua cargos de seu restaurante.</p>
-                    <a href="{% url "role" %}" class="btn btn-primary">Ver Cargos</a>
+                    <h5 class="card-title">Gestão das Mesas</h5>
+                    <p class="card-text">Cadastre, edite e exclua mesas de seu restaurante.</p>
+                    <a href="{% url "table" %}" class="btn btn-primary">Ver Mesas</a>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Gestão de Funcionários</h5>
-                    <p class="card-text">Organize e cadastre seus funcionários de acordo com suas categorias.</p>
-                    <a href="{% url "employee" %}" class="btn btn-primary">Ver Funcionários</a>
+                    <h5 class="card-title">Gestão das Reservas</h5>
+                    <p class="card-text">Organize e cadastre as reservas para seus clientes.</p>
+                    <a href="{% url "reservation" %}" class="btn btn-primary">Ver Reservas</a>
                 </div>
             </div>
         </div>
