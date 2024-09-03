@@ -46,6 +46,16 @@ input[type="text"], input[type="email"], input[type="number"], select, textarea{
     border-radius: 4px;
 }
 
+.btn-order{
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
 @media screen and (max-width: 1000px) {
     #return-icon {
         left: 20px;

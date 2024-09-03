@@ -75,3 +75,23 @@ class ReservationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['table'].queryset = Table.objects.filter(is_available=True)
         self.fields['customer'].queryset = Customer.objects.filter(has_table=False)
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['customer', 'items']
+        labels = {
+            'customer': 'Cliente',
+            'items': 'Itens',
+        }
+
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = ['order', 'item', 'quantity', 'total_price']
+        labels = {
+            'order': 'Pedido',
+            'item': 'Item',
+            'quantity': 'Quantidade',
+            'total_price': 'Preço Total',
+        }
