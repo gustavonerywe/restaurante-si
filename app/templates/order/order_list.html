@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+{% block title %}
+Pedidos
+{% endblock %}
+{% block main %}
+<div class="return-page">
+    <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="display-4">Lista de pedidos</h1>
+        </div>
+    </div>
+    <div class="row text-center mt-10">
+        {% if orders %}
+            {% for order in orders %}
+                <div class="col-md-15 mt-15 mt-md-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pedidos Cadastrados</h5>
+                            <p class="card-text">Gerencie os pedidos que foram cadastrados.</p>
+                            <button data-order="{{order.id}}" class="btn btn-primary">Finalizar pedido</button>
+                            <a href="{% url "edit_order" order.id %}" class="btn btn-warning">Editar pedido</a>
+                            <button class="btn btn-danger" data-order="{{order.id}}">Cancelar pedido</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <a href="{% url "order" %}" class="btn btn-primary btn-order">Cadastre novos pedidos</a>
+    </div>
+</div>
+{% endblock %}

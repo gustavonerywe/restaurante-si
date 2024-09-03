@@ -32,8 +32,8 @@ class MenuItem(models.Model):
     
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    status = models.CharField(max_length=100)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=100, null=True, blank=True)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     items = models.ManyToManyField(MenuItem)
     created_at = models.DateTimeField(auto_now_add=True)
 

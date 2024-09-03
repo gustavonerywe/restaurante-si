@@ -26,4 +26,12 @@ urlpatterns = [
     path('edit_table/<int:table_id>/', edit_table, name='edit_table'),
     path('reservation/', reservation, name='reservation'),
     path('delete_reservation/<int:reservation_id>/', delete_reservation, name='delete_reservation'),
+    path('order_list/', order_list, name='order_list'),
+    path('order/', order, name='order'),
+    path('delete_order/<int:order_id>/', delete_order, name='delete_order'),
+    path('edit_order/<int:order_id>/', edit_order, name='edit_order'),
+    path('order_item_list/', order_item_list, name='order_item'),
+    path('order_item/', order_item, name='order_item'),
+    path('delete_order_item/<int:order_item_id>/', delete_order_item, name='delete_order_item'),
+    path('edit_order_item/<int:order_item_id>/', edit_order_item, name='edit_order_item'),
 ]

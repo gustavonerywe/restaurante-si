@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+{% block title %}
+Pedido
+{% endblock %}
+{% block main %}
+<div class="return-page">
+    <a href="{% url "index" %}" id="return-icon"><i class="fa-solid fa-arrow-left" aria-hidden=true ></i></a>
+ </div>
+<div class="container mt-5">
+    <h2>Cadastrar Pedido</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}
