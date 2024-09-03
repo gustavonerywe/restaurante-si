@@ -62,6 +62,7 @@ class Table(models.Model):
 class Reservation(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -64,10 +64,11 @@ class TableForm(forms.ModelForm):
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['customer', 'table',]
+        fields = ['customer', 'table', 'quantity']
         labels = {
             'customer': 'Cliente',
             'table': 'Mesa',
+            'quantity': 'Quantidade de Pessoas',
         }
 
     def __init__(self, *args, **kwargs):

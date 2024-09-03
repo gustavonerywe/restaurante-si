@@ -19,7 +19,7 @@ Reservas
             {% for reservation in reservations %}
             <li id="reservation-{{reservation.id}}" class="list-group-item">
                 <div>
-                    Cliente: {{ reservation.customer }} <br> Mesa: {{ reservation.table }} <br> Criado em: {{ reservation.created_at|date:"d/m/Y" }}
+                    Cliente: {{ reservation.customer }} <br> Mesa: {{ reservation.table }} <br> Pessoas: {{reservation.quantity}} <br> Criado em: {{ reservation.created_at|date:"d/m/Y" }}
                 </div>
                 <div>
                     <span data-reservation="{{reservation.id}}" class="remove-reservation rm" id="remove-{{reservation.id}}">

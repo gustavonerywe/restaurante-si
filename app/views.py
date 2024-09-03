@@ -192,6 +192,10 @@ def reservation(request):
         if form.is_valid():
             table = form.cleaned_data['table']
             customer = form.cleaned_data['customer']
+            quantity = form.cleaned_data['quantity']
+            if table.capacity < quantity:
+                form.add_error('quantity', 'Quantidade de pessoas excede a capacidade da mesa')
+                return render(request, 'reserve/reservation.html', {'form': form})
             if table.is_available:
                 table.is_available = False
                 table.save()
