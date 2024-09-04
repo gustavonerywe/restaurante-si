@@ -79,11 +79,18 @@ class ReservationForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['customer', 'items']
+        fields = ['customer']
         labels = {
             'customer': 'Cliente',
-            'items': 'Itens',
         }
+
+        def save(self, commit=True):
+            # Ensure status is set to pending when creating a new order
+            order = super().save(commit=False)
+            order.status = 'pending'  # Set status to 'pending'
+            if commit:
+                order.save()
+            return order
 
 class OrderItemForm(forms.ModelForm):
     class Meta:

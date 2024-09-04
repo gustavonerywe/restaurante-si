@@ -8,10 +8,18 @@ Pedido
  </div>
 <div class="container mt-5">
     <h2>Cadastrar Pedido</h2>
-    <form method="POST">
+    <form method="post">
         {% csrf_token %}
+        <h3>Crie novo pedido</h3>
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    
+        <h4>Adicione itens ao pedido</h4>
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form.as_p }}
+        {% endfor %}
+    
+        <button class="btn btn-success" type="submit">Faça o pedido!</button>
     </form>
 </div>
 {% endblock %}

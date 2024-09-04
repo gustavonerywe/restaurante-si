@@ -16,20 +16,22 @@ Pedidos
         {% if orders %}
             {% for order in orders %}
                 <div class="col-md-15 mt-15 mt-md-0">
-                    <div class="card">
+                    <div style="margin: 10px; padding: 10px"  id="order-{{order.id}}" class="card">
+                        <h4>Pedido</h4>
                         <div class="card-body">
-                            <h5 class="card-title">Pedidos Cadastrados</h5>
-                            <p class="card-text">Gerencie os pedidos que foram cadastrados.</p>
-                            <button data-order="{{order.id}}" class="btn btn-primary">Finalizar pedido</button>
-                            <a href="{% url "edit_order" order.id %}" class="btn btn-warning">Editar pedido</a>
-                            <button class="btn btn-danger" data-order="{{order.id}}">Cancelar pedido</button>
+                            <p>Cliente: {{order.customer}}</p>
+                            <p id="status-{{order.id}}">Status: {{ order.get_status_display }}</p>
+                            <p>Preço total: R$ {{ order.total_amount }}</p>
+
+                            <button data-order="{{order.id}}" class="btn btn-success finalizar-order">Finalizar pedido</button>
+                            <button id="cancela-{{order.id}}" class="btn btn-danger remove-order" data-order="{{order.id}}">Cancelar pedido</button>
                             
                         </div>
                     </div>
                 </div>
             {% endfor %}
         {% endif %}
-        <a href="{% url "order" %}" class="btn btn-primary btn-order">Cadastre novos pedidos</a>
+        <a href="{% url "create_order" %}" class="btn btn-primary btn-order">Cadastre novos pedidos</a>
     </div>
 </div>
 {% endblock %}
