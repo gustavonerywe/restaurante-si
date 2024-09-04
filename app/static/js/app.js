@@ -182,4 +182,53 @@ document.addEventListener('DOMContentLoaded', function (){
             });
         }
     })
+
+    document.querySelectorAll('.remove-order').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-order')
+            console.log(id)
+            var url = `/delete_order/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('order-' + id).remove();
+                }
+            });
+        }
+    })
+
+    document.querySelectorAll('.finalizar-order').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-order')
+            console.log(id)
+            var url = `/finaliza_order/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    window.location.reload()
+                    document.getElementById('cancela-' + id).remove();
+                }
+            });
+        }
+    })
 })

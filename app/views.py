@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 from .forms import *
+from django.forms import modelformset_factory
 
 def index(request):
     return render(request, 'index.html')
@@ -224,67 +225,38 @@ def delete_reservation(request, reservation_id):
         reservation.delete()
     return JsonResponse({'success': True})
 
+def create_order(request):
+    OrderItemFormSet = modelformset_factory(OrderItem, fields=('item', 'quantity'), extra=1)
+    
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        formset = OrderItemFormSet(request.POST)
+        if form.is_valid() and formset.is_valid():
+            order = form.save()  # Status is set to 'pending' in the form's save method
+            for form_item in formset:
+                order_item = form_item.save(commit=False)
+                order_item.order = order
+                order_item.save()
+            return redirect('order_list')
+    else:
+        form = OrderForm()
+        formset = OrderItemFormSet(queryset=OrderItem.objects.none())
+    
+    return render(request, 'order/create_order.html', {'form': form, 'formset': formset})
+
+
 def order_list(request):
     orders = Order.objects.all()
     return render(request, 'order/order_list.html', {'orders': orders})
 
-def order(request):
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        print(form)
-        if form.is_valid():
-            form.save()
-            return redirect('order_list')
-    else:
-        form = OrderForm()
-    return render(request, 'order/order.html', {'form': form})
+def finaliza_order(request, order_id):
+    order = Order.objects.get(pk=order_id)
+    order.status = 'completed'
+    order.save()
+    return JsonResponse({'success': True})
 
-def edit_order(request, pk):
-    order = Order.objects.get(pk=pk)
+def delete_order(request, order_id):
     if request.method == 'POST':
-        form = OrderForm(request.POST, instance=order)
-        if form.is_valid():
-            form.save()
-            return redirect('order_list')
-    else:
-        form = OrderForm(instance=order)
-    return render(request, 'order/order.html', {'form': form})
-
-def delete_order(request, pk):
-    order = Order.objects.get(pk=pk)
-    if request.method == 'POST':
+        order = Order.objects.get(pk=order_id)
         order.delete()
-        return redirect('order_list')
-    return render(request, 'order/order_confirm_delete.html', {'order': order})
-
-def order_item_list(request):
-    order_items = OrderItem.objects.all()
-    return render(request, 'order/orderitem_list.html', {'order_items': order_items})
-
-def order_item(request):
-    if request.method == 'POST':
-        form = OrderItemForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('orderitem_list')
-    else:
-        form = OrderItemForm()
-    return render(request, 'order/orderitem.html', {'form': form})
-
-def edit_order_item(request, pk):
-    order_item = OrderItem.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = OrderItemForm(request.POST, instance=order_item)
-        if form.is_valid():
-            form.save()
-            return redirect('orderitem_list')
-    else:
-        form = OrderItemForm(instance=order_item)
-    return render(request, 'order/orderitem_form.html', {'form': form})
-
-def delete_order_item(request, pk):
-    order_item = OrderItem.objects.get(pk=pk)
-    if request.method == 'POST':
-        order_item.delete()
-        return redirect('orderitem_list')
-    return render(request, 'order/orderitem_confirm_delete.html', {'order_item': order_item})
+    return JsonResponse({'success': True})

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 # Create your models here.
 class Customer(models.Model):
@@ -31,24 +32,34 @@ class MenuItem(models.Model):
         return self.name
     
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pendente'),
+        ('completed', 'Finalizado'),
+        ('canceled', 'Cancelado'),
+    ]
+    
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    status = models.CharField(max_length=100, null=True, blank=True)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    items = models.ManyToManyField(MenuItem)
+    items = models.ManyToManyField(MenuItem, through='OrderItem')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
+    def total_amount(self):
+        return self.orderitem_set.aggregate(total=Sum('total_price'))['total'] or 0.00
 
     def __str__(self):
-        return self.customer.name
+        return f"Pedido {self.pk} para {self.customer}"
     
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=1)
+    total_price = models.DecimalField(max_digits=7, decimal_places=2)
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.item.price * self.quantity
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.order.customer.name + ' - ' + self.item.name
+        return f"{self.quantity} x {self.item.name}"
     
 class Table(models.Model):
     number = models.IntegerField()
