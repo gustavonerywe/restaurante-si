@@ -30,4 +30,7 @@ urlpatterns = [
     path('order_list/', order_list, name='order_list'),
     path('finaliza_order/<int:order_id>/', finaliza_order, name='finaliza_order'),
     path('delete_order/<int:order_id>/', delete_order, name='delete_order'),
+    path('feedback/', feedback, name='feedback'),
+    path('delete_feedback/<int:feedback_id>/', delete_feedback, name='delete_feedback'),
+    path('edit_feedback/<int:feedback_id>/', edit_feedback, name='edit_feedback'),
 ]

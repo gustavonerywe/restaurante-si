@@ -19,13 +19,15 @@ Pedidos
                     <div style="margin: 10px; padding: 10px"  id="order-{{order.id}}" class="card">
                         <h4>Pedido</h4>
                         <div class="card-body">
-                            <p>Cliente: {{order.customer}}</p>
-                            <p id="status-{{order.id}}">Status: {{ order.get_status_display }}</p>
-                            <p>Preço total: R$ {{ order.total_amount }}</p>
-
-                            <button data-order="{{order.id}}" class="btn btn-success finalizar-order">Finalizar pedido</button>
-                            <button id="cancela-{{order.id}}" class="btn btn-danger remove-order" data-order="{{order.id}}">Cancelar pedido</button>
-                            
+                            <p>Cliente: {{ order.customer }}</p>
+                            <p id="status-{{ order.id }}">Status: {{ order.get_status_display }}</p>
+                            {% for item in order.orderitem_set.all %}
+                            <p>{{ item.quantity }} x {{ item.item.name }} - R$ {{ item.total_price }}</p>
+                            {% empty %}
+                            <p>Nenhum item adicionado ao pedido.</p>
+                            {% endfor %}
+                            <button data-order="{{ order.id }}" class="btn btn-success finalizar-order">Finalizar pedido</button>
+                            <button id="cancela-{{ order.id }}" class="btn btn-danger remove-order" data-order="{{ order.id }}">Cancelar pedido</button>
                         </div>
                     </div>
                 </div>

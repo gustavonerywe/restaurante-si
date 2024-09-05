@@ -232,7 +232,7 @@ def create_order(request):
         form = OrderForm(request.POST)
         formset = OrderItemFormSet(request.POST)
         if form.is_valid() and formset.is_valid():
-            order = form.save()  # Status is set to 'pending' in the form's save method
+            order = form.save() 
             for form_item in formset:
                 order_item = form_item.save(commit=False)
                 order_item.order = order
@@ -260,3 +260,31 @@ def delete_order(request, order_id):
         order = Order.objects.get(pk=order_id)
         order.delete()
     return JsonResponse({'success': True})
+
+def feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('feedback')
+    else:
+        form = FeedbackForm()
+    feedbacks = Feedback.objects.all()
+    return render(request, 'feedback/feedback.html', {'form': form, 'feedbacks': feedbacks})
+
+def delete_feedback(request, feedback_id):
+    if request.method == 'POST':
+        feedback = Feedback.objects.get(pk=feedback_id)
+        feedback.delete()
+    return JsonResponse({'success': True})
+
+def edit_feedback(request, feedback_id):
+    feedback = Feedback.objects.get(pk=feedback_id)
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST, instance=feedback)
+        if form.is_valid():
+            form.save()
+            return redirect('feedback')
+    else:
+        form = FeedbackForm(instance=feedback)
+    return render(request, 'feedback/edit_feedback.html', {'form': form})
