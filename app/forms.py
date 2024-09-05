@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.core.exceptions import ValidationError
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -85,9 +86,8 @@ class OrderForm(forms.ModelForm):
         }
 
         def save(self, commit=True):
-            # Ensure status is set to pending when creating a new order
             order = super().save(commit=False)
-            order.status = 'pending'  # Set status to 'pending'
+            order.status = 'pending'
             if commit:
                 order.save()
             return order
@@ -102,3 +102,23 @@ class OrderItemForm(forms.ModelForm):
             'quantity': 'Quantidade',
             'total_price': 'Preço Total',
         }
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['customer', 'rating', 'comments']
+        labels = {
+            'customer': 'Cliente',
+            'rating': 'Avaliação',
+            'comments': 'Comentários',
+        }
+        widgets = {
+            'rating': forms.NumberInput(attrs={'placeholder': '1-5', 'min': 1, 'max': 5}),
+            'comments': forms.Textarea(attrs={'placeholder': 'Deixe seus comentários aqui...'}),
+        }
+
+    def clean_rating(self):
+        rating = self.cleaned_data.get('rating')
+        if rating < 1 or rating > 5:
+            raise ValidationError('A avaliação deve estar entre 1 e 5.')
+        return rating

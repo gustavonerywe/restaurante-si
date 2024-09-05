@@ -159,6 +159,30 @@ document.addEventListener('DOMContentLoaded', function (){
         }
     })
 
+    document.querySelectorAll('.remove-feedback').forEach(function(button){
+        button.onclick = function(){
+            var id = this.getAttribute('data-feedback')
+            console.log(id)
+            var url = `/delete_feedback/${id}/`
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('data:', data);
+                if(data.success){
+                    document.getElementById('feedback-' + id).remove();
+                }
+            });
+        }
+    })
+
     document.querySelectorAll('.remove-reservation').forEach(function(button){
         button.onclick = function(){
             var id = this.getAttribute('data-reservation')
