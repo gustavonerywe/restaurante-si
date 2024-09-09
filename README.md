@@ -1,4 +1,4 @@
-#Restaurante SI
+# Restaurante SI
 
 ## Descrição
 Este é um projeto para a matéria de Fundamentos de Sistemas da Informação desenvolvido com o framework Django. Nele, você encontrará um sistema de gestão de restaurante, com módulos de *Gerenciamento de Clientes, **Gerenciamento de Reservas, **Gerenciamento de Pedidos, **Gerenciamento de Menu, **Gerenciamento de Funcionário* e *Feedback de Clientes*.
