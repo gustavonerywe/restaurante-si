@@ -1,7 +1,7 @@
 # Restaurante SI
 
 ## Descrição
-Este é um projeto para a matéria de Fundamentos de Sistemas da Informação desenvolvido com o framework Django. Nele, você encontrará um sistema de gestão de restaurante, com módulos de *Gerenciamento de Clientes, **Gerenciamento de Reservas, **Gerenciamento de Pedidos, **Gerenciamento de Menu, **Gerenciamento de Funcionário* e *Feedback de Clientes*.
+Este é um projeto para a matéria de Fundamentos de Sistemas da Informação desenvolvido com o framework Django. Nele, você encontrará um sistema de gestão de restaurante, com módulos de **Gerenciamento de Clientes**, **Gerenciamento de Reservas**, **Gerenciamento de Pedidos**, **Gerenciamento de Menu**, **Gerenciamento de Funcionário** e **Feedback de Clientes**.
 
 ## Autores
 - [Gustavo Nery](https://github.com/gustavonerywe/)
@@ -24,37 +24,37 @@ Antes de começar, certifique-se de que o seguinte software esteja instalado:
 
 ### Clonando o repositório
 
-bash
+```bash
 git clone https://github.com/seu-usuario/seu-projeto-django.git
 cd seu-projeto-django
-
+```
 
 ### Criação e ativação do ambiente virtual
 
 É recomendável utilizar um ambiente virtual para isolar as dependências do projeto.
 
-bash
+```bash
 python -m venv venv
 source venv/bin/activate #No Windows: venv\Scripts\activate
-
+```
 
 ### Instalação das dependências
-Instale as dependências do projeto listadas no arquivo *requirements.txt*:
+Instale as dependências do projeto listadas no arquivo **requirements.txt**:
 
-bash
+```bash
 pip install -r requirements.txt
-
+```
 
 ### Rodando o projeto
 Para rodar o servidor de desenvolvimento na porta 8000:
 
-bash
+```bash
 python manage.py runserver 0.0.0.0:8000
-
+```
 
 ## Estrutura do projeto
 
-
+```
 .
 ├── manage.py             # Arquivo de gerenciamento do Django
 ├── README.md             # Documentação do projeto
@@ -121,38 +121,38 @@ python manage.py runserver 0.0.0.0:8000
     ├── settings.py       # Configurações do Django
     ├── urls.py           # URLs principais do projeto
     └── wsgi.py           # Configurações WSGI
-
+```
 ## Requisitos Funcionais
 
-1. *Gerenciamento de Clientes*
+1. **Gerenciamento de Clientes**
    - Cadastro de novos clientes.
    - Atualização de informações de clientes.
    - Exclusão de clientes.
    - Visualização de lista de clientes.
 
-2. *Gerenciamento de Reservas*
+2. **Gerenciamento de Reservas**
    - Criação de novas mesas e reservas.
    - Atualização de mesas e reservas existentes.
    - Cancelamento de reservas e exclusão de mesas.
    - Visualização de reservas por data e visualização de lista de mesas.
 
-3. *Gerenciamento de Pedidos*
+3. **Gerenciamento de Pedidos**
    - Criação de novos pedidos.
    - Cancelamento de pedidos.
    - Visualização de histórico de pedidos.
 
-4. *Gerenciamento de Menu*
+4. **Gerenciamento de Menu**
    - Adição de novos itens e categorias ao menu.
    - Atualização de itens e categorias do menu.
    - Remoção de itens e categorias do menu.
    - Visualização de todos os itens e categorias do menu.
 
-5. *Gerenciamento de Funcionário*
+5. **Gerenciamento de Funcionário**
    - Cadastro de novos funcionários e cargos.
    - Atualização de informações de funcionários e cargos.
    - Exclusão de funcionários e cargos.
    - Visualização de lista de funcionários e cargos.
 
-6. *Feedback de Clientes*
+6. **Feedback de Clientes**
    - Recebimento de feedback dos clientes.
-   - Visualização de feedbacks recebidos
+   - Visualização de feedbacks recebidos.
