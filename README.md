@@ -9,9 +9,6 @@ Este é um projeto para a matéria de Fundamentos de Sistemas da Informação de
 - [Laura Torres](https://github.com/lauratorresss)
 - [Paulo Affonso](https://github.com/affonsopaulo/)
 
-## Demonstração
-Acesse o seguinte site para verificar o funcionamento do sistema: http://18.228.13.180:8000/
-
 ## Pré-requisitos
 
 Antes de começar, certifique-se de que o seguinte software esteja instalado:
