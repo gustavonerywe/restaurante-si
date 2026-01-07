@@ -7,6 +7,20 @@ from django.forms import modelformset_factory
 def index(request):
     return render(request, 'index.html')
 
+def delete_all(request):
+
+    Customer.objects.all().delete()
+    Category.objects.all().delete()
+    MenuItem.objects.all().delete()
+    Role.objects.all().delete()
+    Employee.objects.all().delete()
+    Table.objects.all().delete()
+    Reservation.objects.all().delete()
+    Order.objects.all().delete()
+    OrderItem.objects.all().delete()
+    Feedback.objects.all().delete()
+    
+    return JsonResponse({'success': True})
 
 def customer(request):
     if request.method == 'POST':
