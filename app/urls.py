@@ -33,4 +33,5 @@ urlpatterns = [
     path('feedback/', feedback, name='feedback'),
     path('delete_feedback/<int:feedback_id>/', delete_feedback, name='delete_feedback'),
     path('edit_feedback/<int:feedback_id>/', edit_feedback, name='edit_feedback'),
+    path('delete_all/', delete_all, name='delete_all'),
 ]
